@@ -1,4 +1,6 @@
 console:
+  username: "default"
+  password: "default"
   max_message_size_bytes: 409600
 
 logger:

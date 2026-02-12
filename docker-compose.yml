@@ -8,9 +8,6 @@ services:
     restart: always
     volumes:
       - data:/var/lib/cockroach
-    expose:
-      - "8080"
-      - "26257"
     ports:
       - "26257:26257"
       - "8080:8080"
@@ -22,9 +19,8 @@ services:
       - "/bin/sh"
       - "-ecx"
       - |
-        # Attendre que la DB soit prête
+        echo "Waiting for CockroachDB..."
         until nc -z cockroachdb 26257; do
-          echo "Waiting for CockroachDB..."
           sleep 2
         done
         echo "CockroachDB is up, running migrations..."
@@ -34,10 +30,6 @@ services:
     restart: always
     depends_on:
       - cockroachdb
-    expose:
-      - "7349"
-      - "7350"
-      - "7351"
     ports:
       - "7349:7349"
       - "7350:7350"

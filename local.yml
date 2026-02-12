@@ -18,5 +18,5 @@ matchmaker:
 database:
   driver: postgres
   addresses:
-    - ${DATABASE_URL}
+    - postgresql://nakama_db_62ij_user:VAdwVdmfnH0ylZpqJfXFguSFAj8O2Gpk@dpg-d65k5rngi27c73c0vcc0-a/nakama_db_62ij
 

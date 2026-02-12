@@ -16,5 +16,4 @@ matchmaker:
   interval_sec: 3
 
 database:
-  address:
-    - "${DATABASE_URL}"
+  address: ${DATABASE_URL}

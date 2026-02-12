@@ -10,11 +10,13 @@ services:
       - "26257:26257"
       - "8080:8080"
     volumes:
-      - data:/var/lib/cockroach
+      - cockroach-data:/var/lib/cockroach
 
   nakama:
     container_name: nakama
-    build: .
+    image: heroiclabs/nakama:3.22.0
+    depends_on:
+      - cockroachdb
     entrypoint:
       - "/bin/sh"
       - "-ecx"
@@ -27,12 +29,12 @@ services:
         /nakama/nakama migrate up --database.address root@cockroachdb:26257
         echo "Starting Nakama server..."
         exec /nakama/nakama --name nakama1 --config /nakama/data/local.yml --database.address root@cockroachdb:26257
-    depends_on:
-      - cockroachdb
     ports:
       - "7349:7349"
       - "7350:7350"
       - "7351:7351"
+    volumes:
+      - nakama-data:/nakama/data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:7350/"]
       interval: 10s
@@ -40,4 +42,5 @@ services:
       retries: 5
 
 volumes:
-  data:
+  cockroach-data:
+  nakama-data:

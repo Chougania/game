@@ -1,5 +1,3 @@
-# local.yml - Nakama configuration pour Render
-
 console:
   max_message_size_bytes: 409600
 
@@ -16,10 +14,3 @@ socket:
 
 matchmaker:
   interval_sec: 3
-
-# La section database est commentée car Nakama utilise DATABASE_URL
-# Nakama va automatiquement récupérer la connexion PostgreSQL via la variable d'environnement DATABASE_URL
-# database:
-#   driver: postgres
-#   addresses:
-#     - postgresql://user:password@host:5432/dbname?sslmode=require

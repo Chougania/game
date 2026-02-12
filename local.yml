@@ -16,3 +16,6 @@ socket:
 
 matchmaker:
   interval_sec: 3
+  
+database:
+  address: "root@cockroachdb:26257"

@@ -16,5 +16,7 @@ matchmaker:
   interval_sec: 3
 
 database:
+  driver: postgres
   addresses:
     - ${DATABASE_URL}
+

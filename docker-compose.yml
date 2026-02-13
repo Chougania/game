@@ -5,8 +5,8 @@ services:
     container_name: nakama
     image: heroiclabs/nakama:3.22.0
     environment:
-      - DATABASE_ADDRESS=postgresql://chougan2:<ENTER-SQL-USER-PASSWORD>@oval-cricket-12517.jxf.gcp-europe-west1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full
-      - "Nakama_Name=nakama1"
+      - DATABASE_ADDRESS=postgresql://chougan2:T4BUhVpUGTOwYEAON545SQ@oval-cricket-12517.jxf.gcp-europe-west1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full
+      - NAKAMA_NAME=nakama1
     entrypoint:
       - "/bin/sh"
       - "-ecx"
@@ -14,7 +14,7 @@ services:
         echo "Running Nakama migrations..."
         /nakama/nakama migrate up --database.address $DATABASE_ADDRESS
         echo "Starting Nakama server..."
-        exec /nakama/nakama --name $Nakama_Name --database.address $DATABASE_ADDRESS
+        exec /nakama/nakama --name $NAKAMA_NAME --database.address $DATABASE_ADDRESS
     ports:
       - "7349:7349"
       - "7350:7350"

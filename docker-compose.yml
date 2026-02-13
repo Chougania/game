@@ -1,34 +1,20 @@
 version: '3.8'
 
 services:
-  cockroachdb:
-    container_name: cockroachdb
-    image: cockroachdb/cockroach:latest
-    command: start-single-node --insecure --store=path=/var/lib/cockroach
-    restart: always
-    ports:
-      - "26257:26257"
-      - "8080:8080"
-    volumes:
-      - cockroach-data:/var/lib/cockroach
-
   nakama:
     container_name: nakama
     image: heroiclabs/nakama:3.22.0
-    depends_on:
-      - cockroachdb
+    environment:
+      - DATABASE_ADDRESS=postgresql://chougan2:<ENTER-SQL-USER-PASSWORD>@oval-cricket-12517.jxf.gcp-europe-west1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full
+      - "Nakama_Name=nakama1"
     entrypoint:
       - "/bin/sh"
       - "-ecx"
       - |
-        echo "Waiting for CockroachDB..."
-        until nc -z cockroachdb 26257; do
-          sleep 2
-        done
         echo "Running Nakama migrations..."
-        /nakama/nakama migrate up --database.address root@cockroachdb:26257
+        /nakama/nakama migrate up --database.address $DATABASE_ADDRESS
         echo "Starting Nakama server..."
-        exec /nakama/nakama --name nakama1 --config /nakama/data/local.yml --database.address root@cockroachdb:26257
+        exec /nakama/nakama --name $Nakama_Name --database.address $DATABASE_ADDRESS
     ports:
       - "7349:7349"
       - "7350:7350"
@@ -42,5 +28,4 @@ services:
       retries: 5
 
 volumes:
-  cockroach-data:
   nakama-data:

@@ -16,9 +16,3 @@ socket:
 
 matchmaker:
   interval_sec: 3
-
-database:
-  address: "postgresql://nakama_db_62ij_user:VAdwVdmfnH0ylZpqJfXFguSFAj8O2Gpk@dpg-d65k5rngi27c73c0vcc0-a:5432/nakama_db_62ij?sslmode=require"
-
-
-

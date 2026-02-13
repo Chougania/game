@@ -16,3 +16,6 @@ socket:
 
 matchmaker:
   interval_sec: 3
+  
+database:
+  address: "postgresql://chougan2:T4BUhVpUGTOwYEAON545SQ@oval-cricket-12517.jxf.gcp-europe-west1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full"
